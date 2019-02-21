@@ -2,9 +2,12 @@ package br.com.caelum.livraria.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import br.com.caelum.livraria.modelo.Livro;
 
-
+//Transforma em EJB
+@Stateless
 public class LivroDao {
 
 	private Banco banco = new Banco();

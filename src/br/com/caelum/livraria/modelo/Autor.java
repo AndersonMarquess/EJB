@@ -36,4 +36,8 @@ public class Autor {
 		this.nome = nome;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Autor [id=%s, nome=%s]", id, nome);
+	}
 }
