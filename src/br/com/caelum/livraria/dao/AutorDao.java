@@ -7,22 +7,26 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
+import br.com.caelum.livraria.interceptador.LogInterceptador;
 import br.com.caelum.livraria.modelo.Autor;
 
 //Transforma em para ser gerenciado pelo container EJB
 //Thread safe, o proprio ejb cria outra instancia caso esta esteja ocupada.
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)//permite uso do begin e commit para controle manual das transacoes
+@Interceptors({LogInterceptador.class})//Usado para informar que esta classe faz uso do interceptor
 //@TransactionManagement(TransactionManagementType.CONTAINER)//default
 public class AutorDao {
 
 	//Necessario para o contexto de persistencia
 	@PersistenceContext
 	private EntityManager entityManager;
+	//Necessario para o gerenciamento manual das transações
 	@Inject
 	private UserTransaction transacao;
 
