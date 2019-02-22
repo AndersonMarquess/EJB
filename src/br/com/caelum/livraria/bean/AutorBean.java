@@ -5,7 +5,6 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
-import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.modelo.Autor;
 
 @Model
@@ -15,18 +14,18 @@ public class AutorBean {
 	
 	//Funciona como autowird
 	@Inject
-	private AutorDao dao;
+	private AutorService autorService;
 	
 	public Autor getAutor() {
 		return autor;
 	}
 	
 	public void cadastra() {
-		this.dao.salva(autor);
+		autorService.addAutor(autor);
 		this.autor = new Autor();
 	}
 	
 	public List<Autor> getAutores() {
-		return this.dao.todosAutores();
+		return autorService.findAllAutores();
 	}
 }
